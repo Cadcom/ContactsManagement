@@ -1,6 +1,6 @@
 ﻿
 
-namespace Contacts.Data.Entities
+namespace Contacts.Shared.Entities
 {
     public enum InfoType
     {

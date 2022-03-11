@@ -1,4 +1,4 @@
-﻿using Contacts.Data.Entities;
+﻿using Contacts.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

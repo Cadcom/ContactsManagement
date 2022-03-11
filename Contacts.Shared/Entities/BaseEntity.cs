@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contacts.Data.Entities
+namespace Contacts.Shared.Entities
 {
     public abstract class BaseEntity
     {

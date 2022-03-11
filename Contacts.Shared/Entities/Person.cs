@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Contacts.Data.Entities
+namespace Contacts.Shared.Entities
 {
     public class Person: BaseEntity
     {

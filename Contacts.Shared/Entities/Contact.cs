@@ -1,4 +1,5 @@
-﻿namespace Contacts.Data.Entities
+﻿
+namespace Contacts.Shared.Entities
 {
     public class Contact: BaseEntity
     {

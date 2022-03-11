@@ -19,7 +19,7 @@ namespace Contacts.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("Contacts.Data.Entities.Contact", b =>
+            modelBuilder.Entity("Contacts.Shared.Entities.Contact", b =>
                 {
                     b.Property<Guid>("UUID")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace Contacts.Data.Migrations
                     b.ToTable("Contact");
                 });
 
-            modelBuilder.Entity("Contacts.Data.Entities.Person", b =>
+            modelBuilder.Entity("Contacts.Shared.Entities.Person", b =>
                 {
                     b.Property<Guid>("UUID")
                         .ValueGeneratedOnAdd()
@@ -67,14 +67,14 @@ namespace Contacts.Data.Migrations
                     b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("Contacts.Data.Entities.Contact", b =>
+            modelBuilder.Entity("Contacts.Shared.Entities.Contact", b =>
                 {
-                    b.HasOne("Contacts.Data.Entities.Person", null)
+                    b.HasOne("Contacts.Shared.Entities.Person", null)
                         .WithMany("ContactData")
                         .HasForeignKey("PersonUUID");
                 });
 
-            modelBuilder.Entity("Contacts.Data.Entities.Person", b =>
+            modelBuilder.Entity("Contacts.Shared.Entities.Person", b =>
                 {
                     b.Navigation("ContactData");
                 });
