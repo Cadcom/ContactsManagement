@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Contacts.Data.Migrations
 {
     [DbContext(typeof(ContactsDBContext))]
-    [Migration("20220311180542_ContactsMigration")]
+    [Migration("20220311200902_ContactsMigration")]
     partial class ContactsMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,10 +28,11 @@ namespace Contacts.Data.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Info")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
-                    b.Property<Guid?>("PersonUUID")
+                    b.Property<Guid>("PersonID")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Type")
@@ -39,9 +40,9 @@ namespace Contacts.Data.Migrations
 
                     b.HasKey("UUID");
 
-                    b.HasIndex("PersonUUID");
+                    b.HasIndex("PersonID");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("Contacts.Shared.Entities.Person", b =>
@@ -61,19 +62,23 @@ namespace Contacts.Data.Migrations
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("character varying(35)");
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
 
                     b.HasKey("UUID");
 
-                    b.ToTable("Person");
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("Contacts.Shared.Entities.Contact", b =>
                 {
-                    b.HasOne("Contacts.Shared.Entities.Person", null)
+                    b.HasOne("Contacts.Shared.Entities.Person", "Person")
                         .WithMany("ContactData")
-                        .HasForeignKey("PersonUUID");
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Contacts.Shared.Entities.Person", b =>

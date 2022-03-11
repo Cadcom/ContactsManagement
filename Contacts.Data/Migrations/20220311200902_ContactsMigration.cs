@@ -8,52 +8,52 @@ namespace Contacts.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "Persons",
                 columns: table => new
                 {
                     UUID = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    Surname = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false),
+                    Surname = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     Company = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.UUID);
+                    table.PrimaryKey("PK_Persons", x => x.UUID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contact",
+                name: "Contacts",
                 columns: table => new
                 {
                     UUID = table.Column<Guid>(type: "uuid", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    Info = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    PersonUUID = table.Column<Guid>(type: "uuid", nullable: true)
+                    Info = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    PersonID = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contact", x => x.UUID);
+                    table.PrimaryKey("PK_Contacts", x => x.UUID);
                     table.ForeignKey(
-                        name: "FK_Contact_Person_PersonUUID",
-                        column: x => x.PersonUUID,
-                        principalTable: "Person",
+                        name: "FK_Contacts_Persons_PersonID",
+                        column: x => x.PersonID,
+                        principalTable: "Persons",
                         principalColumn: "UUID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contact_PersonUUID",
-                table: "Contact",
-                column: "PersonUUID");
+                name: "IX_Contacts_PersonID",
+                table: "Contacts",
+                column: "PersonID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contact");
+                name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Persons");
         }
     }
 }
