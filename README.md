@@ -8,7 +8,10 @@ Teknoloji
 
 3. Uygulamada katmanlı mimari kullanılarak katmanlar birbirine dependency injection yöntemi ile bağlanmıştır.
 
+4. Web API'nin yapısını görselleştirmek için Swagger kütüphanesi kullanılmıştır.  
+
 Senaryo
+
 Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapı tasarlayarak, basit
 bir telefon rehberi uygulaması oluşturulması sağlanacaktır.
 
