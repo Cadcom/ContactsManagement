@@ -14,9 +14,9 @@ namespace Contacts.API.Controllers
     public class ContactsController : Controller
     {
         IContactService service;
-        public ContactsController()
+        public ContactsController(IContactService service)
         {
-            service = new ContactService();
+            this.service = service;
         }
 
         [HttpPost]

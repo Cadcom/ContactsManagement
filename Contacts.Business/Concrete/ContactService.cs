@@ -13,9 +13,9 @@ namespace Contacts.Business.Concrete
     public class ContactService : IContactService
     {
         IDatabaseHelper databaseHelper;
-        public ContactService()
+        public ContactService(IDatabaseHelper databaseHelper)
         {
-            databaseHelper=new DatabaseHelper();
+            this.databaseHelper = databaseHelper;
         }
 
         public async Task DeleteContactAsync(Guid id)
