@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tarim11.WEB.Extensions;
 
 namespace Contacts.Web
 {
@@ -24,6 +25,12 @@ namespace Contacts.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddHttpClient("api", c =>
+            {
+                c.BaseAddress = new Uri(Configuration["apiBaseAddress"]);
+            });
+            services.AddScoped<IRequestAPI, requestAPI>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,10 +1,34 @@
 ﻿@page
+@using Contacts.Shared.Entities
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Persons List";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Persons List</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>SurName</th>
+                <th>Company</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Person person in Model.persons)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.Surname</td>
+                    <td>@person.Company</td>
+                    <td><a class="btn btn-primary" asp-page="person" asp-route-ID="@person.UUID" >Edit</a> </td>
+                    <td><a class="btn btn-danger" asp-page="index" asp-route-ID="@person.UUID" asp-page-handler="removePerson">Remove</a> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

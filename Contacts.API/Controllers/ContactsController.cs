@@ -21,7 +21,7 @@ namespace Contacts.API.Controllers
 
         /// <summary>
         /// Insert or Update Person Method. If person.Guid is null than this is an add property else this is an update
-        /// property. So finds the person and update it.
+        /// property. So finds the person from database and update it.
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
@@ -29,14 +29,18 @@ namespace Contacts.API.Controllers
         [Route("InsertOrUpdatePerson")]
         public async Task<IActionResult> InsertOrUpdatePersonAsync(Person person)
         {
-            var result= await service.InsertOrUpdatePersonAsync(person);
-            return Json(result);
+            if (ModelState.IsValid)
+            {
+                var result = await service.InsertOrUpdatePersonAsync(person);
+                return Json(result);
+            }
+            else return BadRequest(ModelState);
         }
 
 
         /// <summary>
         /// Insert or Update Contact Method. If contact.Guid is null than this is an add property else this is an update
-        /// property. So finds the contact and update it.
+        /// property. So finds the contact from database and update it.
         /// </summary>
         /// <param name="contact"></param>
         /// <returns></returns>
@@ -44,8 +48,12 @@ namespace Contacts.API.Controllers
         [Route("InsertOrUpdateContact")]
         public async Task<IActionResult> InsertOrUpdateContactAsync(Contact contact)
         {
-            var result = await service.InsertOrUpdateContactAsync(contact);
-            return Json(result);
+            if (ModelState.IsValid)
+            {
+                var result = await service.InsertOrUpdateContactAsync(contact);
+                return Json(result);
+            }
+            else return BadRequest(ModelState);
         }
 
         /// <summary>
