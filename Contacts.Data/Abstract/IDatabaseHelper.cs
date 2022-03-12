@@ -16,5 +16,6 @@ namespace Contacts.Data.Abstract
         public Task DeleteContactAsync(Guid guid);
         public Task<Contact> GetContactAsync(Guid guid);
         public List<Contact> GetAllContacts();
+        public List<Contact> GetContactsByPersonID(Guid guid);
     }
 }

@@ -100,5 +100,13 @@ namespace Contacts.Data.Concrate
 
             return contacts;
         }
+
+        public List<Contact> GetContactsByPersonID(Guid guid)
+        {
+            using var db = new ContactsDBContext();
+            var contacts= db.Contacts.Where(x => x.PersonID == guid).ToList();
+
+            return contacts;
+        }
     }
 }

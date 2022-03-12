@@ -43,6 +43,11 @@ namespace Contacts.Business.Concrete
             return await databaseHelper.GetContactAsync(id);
         }
 
+        public List<Contact> GetContactsByPersonID(Guid id)
+        {
+            return databaseHelper.GetContactsByPersonID(id);
+        }
+
         public async Task<Person> getPersonByIDAsync(Guid id)
         {
             return await databaseHelper.GetPersonAsync(id);

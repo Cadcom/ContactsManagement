@@ -18,5 +18,6 @@ namespace Contacts.Business.Abstract
         Task<Contact> getContactByIDAsync(Guid id);
         Task<Contact> InsertOrUpdateContactAsync(Contact person);
         Task DeleteContactAsync(Guid id);
+        List<Contact> GetContactsByPersonID(Guid id);
     }
 }
