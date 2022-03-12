@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.OpenApi.Models;
 
 namespace Contacts.API
 {
@@ -24,6 +24,10 @@ namespace Contacts.API
             //services.AddDbContext<ContactsDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("myConnectionString"), b => b.MigrationsAssembly("Contacts.Data")));
             //services.AddScoped<DbContext>(provider => provider.GetService<ContactsDBContext>());
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contacts.API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +36,8 @@ namespace Contacts.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts.API v1"));
             }
 
             app.UseHttpsRedirection();
