@@ -19,6 +19,12 @@ namespace Contacts.API.Controllers
             this.service = service;
         }
 
+        /// <summary>
+        /// Insert or Update Person Method. If person.Guid is null than this is an add property else this is an update
+        /// property. So finds the person and update it.
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("InsertOrUpdatePerson")]
         public async Task<IActionResult> InsertOrUpdatePersonAsync(Person person)
@@ -27,6 +33,13 @@ namespace Contacts.API.Controllers
             return Json(result);
         }
 
+
+        /// <summary>
+        /// Insert or Update Contact Method. If contact.Guid is null than this is an add property else this is an update
+        /// property. So finds the contact and update it.
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("InsertOrUpdateContact")]
         public async Task<IActionResult> InsertOrUpdateContactAsync(Contact contact)
@@ -35,6 +48,11 @@ namespace Contacts.API.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// Deletes the person by given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("DeletePerson")]
         public async Task DeletePersonAsync(Guid id)
@@ -42,6 +60,11 @@ namespace Contacts.API.Controllers
             await service.DeletePersonAsync(id);
         }
 
+        /// <summary>
+        /// Deletes the contact by given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("DeleteContact")]
         public async Task DeleteContactAsync(Guid id)
@@ -49,6 +72,12 @@ namespace Contacts.API.Controllers
              await service.DeleteContactAsync(id);
         }
 
+
+        /// <summary>
+        /// Gets the Person data by person id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetPersonByID")]
         public async Task<IActionResult> GetPersonByIDAsync(Guid id)
@@ -57,6 +86,12 @@ namespace Contacts.API.Controllers
             return Json(result);
         }
 
+
+        /// <summary>
+        /// Gets the Contact data by person id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetContactByID")]
         public async Task<IActionResult> GetContactByIDAsync(Guid id)
@@ -65,6 +100,11 @@ namespace Contacts.API.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// Get all contact list which given person id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetContactsByPersonID")]
         public IActionResult GetContactsByPersonID(Guid id)
@@ -73,6 +113,11 @@ namespace Contacts.API.Controllers
             return Json(result);
         }
 
+
+        /// <summary>
+        /// Gets all persons from database. No filter, No parameter
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllPersons")]
         public IActionResult GetAllPersons()
@@ -81,6 +126,11 @@ namespace Contacts.API.Controllers
             return Json(result);
         }
 
+
+        /// <summary>
+        /// Gets all contacts from database. No filter, No parameter
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllContacts")]
         public IActionResult GetAllContacts()

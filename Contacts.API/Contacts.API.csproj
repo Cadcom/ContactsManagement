@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <DocumentationFile>D:\Programming\Web\ContactsManagement\Contacts.API\bin\Debug\net5.0\Contacts.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
