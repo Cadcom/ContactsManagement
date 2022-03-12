@@ -10,6 +10,8 @@ Teknoloji
 
 4. Web API'nin yapısını görselleştirmek için Swagger kütüphanesi kullanılmıştır.  
 
+5. Web API'nin test edilmesi için Unit Test Uygulaması eklendi. 
+
 Senaryo
 
 Birbirleri ile haberleşen minimum iki microservice'in olduğu bir yapı tasarlayarak, basit
@@ -33,10 +35,10 @@ Beklenen işlevler:
 getirilmesi :                        Api/Contacts/GetContactsByPersonID
 
 • Rehberdeki kişilerin bulundukları konuma göre istatistiklerini çıkartan bir rapor
-talebi
+talebi : Api/Contacts/GetReport
 
-• Sistemin oluşturduğu raporların listelenmesi
+• Sistemin oluşturduğu raporların listelenmesi : Api/Contacts/GetReport
 
-• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi
+• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi : ?
 
 
