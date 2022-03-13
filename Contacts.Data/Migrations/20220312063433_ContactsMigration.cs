@@ -45,6 +45,8 @@ namespace Contacts.Data.Migrations
                 name: "IX_Contacts_PersonID",
                 table: "Contacts",
                 column: "PersonID");
+
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -54,6 +56,8 @@ namespace Contacts.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Persons");
+
+            
         }
     }
 }

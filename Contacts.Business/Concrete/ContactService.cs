@@ -1,6 +1,7 @@
 ﻿using Contacts.Business.Abstract;
 using Contacts.Data.Abstract;
 using Contacts.Data.Concrate;
+using Contacts.Shared.DTOs;
 using Contacts.Shared.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,14 +29,15 @@ namespace Contacts.Business.Concrete
             await databaseHelper.DeletePersonAsync(id);
         }
 
-        public List<Contact> getAllContacts()
+        public List<Contact> getAllContacts(int page = 1, int size = 20)
         {
-            return databaseHelper.GetAllContacts();
+            return databaseHelper.GetAllContacts(page,size).ToList();
         }
 
-        public List<Person> getAllPersons()
+        public List<Person> getAllPersons(int page = 1, int size = 20)
         {
-            return databaseHelper.GetAllPersons();
+            var result= databaseHelper.GetAllPersons(page, size);
+            return result;
         }
 
         public async Task<Contact> getContactByIDAsync(Guid id)
@@ -45,12 +47,17 @@ namespace Contacts.Business.Concrete
 
         public List<Contact> GetContactsByPersonID(Guid id)
         {
-            return databaseHelper.GetContactsByPersonID(id);
+            return databaseHelper.GetContactsByPersonID(id).ToList();
         }
 
         public async Task<Person> getPersonByIDAsync(Guid id)
         {
             return await databaseHelper.GetPersonAsync(id);
+        }
+
+        public List<Report> GetReport()
+        {
+            return databaseHelper.GetReport();
         }
 
         public async Task<Contact> InsertOrUpdateContactAsync(Contact contact)

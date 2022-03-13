@@ -5,7 +5,7 @@ using Contacts.Data.Abstract;
 using Contacts.Data.Concrate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +25,8 @@ namespace Contacts.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ContactsDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("myConnectionString"), b => b.MigrationsAssembly("Contacts.Data")));
-            //services.AddScoped<DbContext>(provider => provider.GetService<ContactsDBContext>());
+            services.AddDbContext<ContactsDBContext>(options => options.UseNpgsql(Configuration["myConnectionString"], b => b.MigrationsAssembly("Contacts.Data")));
+            services.AddScoped<DbContext>(provider => provider.GetService<ContactsDBContext>());
             services.AddScoped<IDatabaseHelper, DatabaseHelper>();
             services.AddScoped<IContactService, ContactService>();
             services.AddControllers();

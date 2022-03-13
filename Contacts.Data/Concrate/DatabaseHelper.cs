@@ -1,5 +1,7 @@
 ﻿using Contacts.Data.Abstract;
+using Contacts.Shared.DTOs;
 using Contacts.Shared.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,13 @@ namespace Contacts.Data.Concrate
 {
     public class DatabaseHelper: IDatabaseHelper
     {
+        ContactsDBContext db;
+        public DatabaseHelper(ContactsDBContext db)
+        {
+            this.db= db;
+        }
 
         public async Task<Person> insertOrUpdatePersonAsync(Person person) {
-
-            using var db = new ContactsDBContext(); 
             
             
             if (person.UUID == Guid.Empty)
@@ -30,7 +35,6 @@ namespace Contacts.Data.Concrate
 
         public async Task DeletePersonAsync(Guid guid)
         {
-            using var db = new ContactsDBContext();
             var deletePerson = await GetPersonAsync(guid);
 
             if (deletePerson != null)
@@ -41,23 +45,22 @@ namespace Contacts.Data.Concrate
 
         public async Task<Person> GetPersonAsync(Guid guid)
         {
-            using var db = new ContactsDBContext();
             var person = await db.FindAsync<Person>(guid);
 
             return person;
         }
 
-        public List<Person> GetAllPersons()
+        public List<Person> GetAllPersons(int page = 1, int size = 20)
         {
-            using var db = new ContactsDBContext();
-            var person = db.Persons.AsEnumerable().ToList();
+            if (size==0)
+                return db.Persons.AsQueryable().ToList();
+            else
+                return db.Persons.AsQueryable().Skip((page - 1) * size).Take(size).ToList();
 
-            return person;
         }
 
         public async Task<Contact> insertOrUpdateContactAsync(Contact contact)
         {
-            using var db = new ContactsDBContext();
 
 
             if (contact.UUID == Guid.Empty)
@@ -76,7 +79,6 @@ namespace Contacts.Data.Concrate
 
         public async Task DeleteContactAsync(Guid guid)
         {
-            using var db = new ContactsDBContext();
             var deleteContact = await GetContactAsync(guid);
 
             if (deleteContact != null)
@@ -87,24 +89,37 @@ namespace Contacts.Data.Concrate
 
         public async Task<Contact> GetContactAsync(Guid guid)
         {
-            using var db = new ContactsDBContext();
             var contact = await db.FindAsync<Contact>(guid);
 
             return contact;
         }
 
-        public List<Contact> GetAllContacts()
+        public List<Contact> GetAllContacts(int page=1, int size=20)
         {
-            using var db = new ContactsDBContext();
-            var contacts = db.Contacts.AsEnumerable().ToList();
-
-            return contacts;
+            if (size == 0)
+                return db.Contacts.AsQueryable().ToList();
+            else
+                return db.Contacts.AsQueryable().Skip((page - 1) * size).Take(size).ToList();
         }
 
         public List<Contact> GetContactsByPersonID(Guid guid)
         {
-            using var db = new ContactsDBContext();
-            var contacts= db.Contacts.Where(x => x.PersonID == guid).ToList();
+            var contacts= db.Contacts.AsQueryable().Where(x => x.PersonID == guid).ToList();
+
+            return contacts;
+        }
+
+        public List<Report> GetReport()
+        {
+            var myList = db.Contacts;
+
+            var contacts = myList.Where(x => x.Type == InfoType.Location).GroupBy(t => t.Info)
+                           .Select (t => new Report
+                           {
+                               Konum = t.Key,
+                               Kisi = t.Distinct().Count(),
+                               Telefon = (myList.Where(x => x.Type == InfoType.PhoneNumber && x.Info.Equals(t.Key)).Count())
+                           }).ToList< Report>();
 
             return contacts;
         }

@@ -24,7 +24,7 @@ namespace Contacts.Web.Pages
 
         public async Task OnGetAsync()
         {
-            persons=await requestAPI.getListAsync<Person>("GetAllPersons");
+            persons=await requestAPI.getListAsync<Person>("GetAllPersons?page=0&size=0");
         }
 
         public async Task<IActionResult> OnGetRemovePersonAsync(Guid guid) {

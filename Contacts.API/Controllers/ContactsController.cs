@@ -1,9 +1,7 @@
 ﻿using Contacts.Business.Abstract;
-using Contacts.Business.Concrete;
 using Contacts.Shared.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Contacts.API.Controllers
@@ -123,27 +121,39 @@ namespace Contacts.API.Controllers
 
 
         /// <summary>
-        /// Gets all persons from database. No filter, No parameter
+        /// Gets all persons from database. if size=0 returns all table datas, otherwise apply pagination.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("GetAllPersons")]
-        public IActionResult GetAllPersons()
+        public IActionResult GetAllPersons(int page = 1, int size = 20)
         {
-            var result = service.getAllPersons();
+            var result = service.getAllPersons(page,size);
             return Json(result);
         }
 
 
         /// <summary>
-        /// Gets all contacts from database. No filter, No parameter
+        /// Gets all contacts from database. if size=0 returns all table datas, otherwise apply pagination.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("GetAllContacts")]
-        public IActionResult GetAllContacts()
+        public IActionResult GetAllContacts(int page = 1, int size = 20)
         {
-            var result = service.getAllContacts();
+            var result = service.getAllContacts(page,size);
+            return Json(result);
+        }
+
+        /// <summary>
+        /// Gets all contacts from database. if size=0 returns all table datas, otherwise apply pagination.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetReport")]
+        public IActionResult GetReport()
+        {
+            var result = service.GetReport();
             return Json(result);
         }
     }
