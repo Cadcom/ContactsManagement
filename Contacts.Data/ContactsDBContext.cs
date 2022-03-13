@@ -17,11 +17,11 @@ namespace Contacts.Data
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ContactsDBContext).Assembly);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            //optionsBuilder.UseNpgsql("Server=localhost;Database=DBContacts;User Id=postgres;Password=123456", b => b.MigrationsAssembly("Contacts.Data"));
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    //optionsBuilder.UseNpgsql("Server=localhost;Database=DBContacts;User Id=postgres;Password=123456", b => b.MigrationsAssembly("Contacts.Data"));
+        //}
 
         
     }

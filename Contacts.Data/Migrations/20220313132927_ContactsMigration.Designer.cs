@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Contacts.Data.Migrations
 {
     [DbContext(typeof(ContactsDBContext))]
-    [Migration("20220312063433_ContactsMigration")]
+    [Migration("20220313132927_ContactsMigration")]
     partial class ContactsMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
