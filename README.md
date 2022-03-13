@@ -39,6 +39,6 @@ talebi : Api/Contacts/GetReport
 
 • Sistemin oluşturduğu raporların listelenmesi : Api/Contacts/GetReport
 
-• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi : ?
+• Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi : ? İstenen asenkron yapı tam olarak anlaşılamadı.
 
 
